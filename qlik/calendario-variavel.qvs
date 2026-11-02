@@ -1,0 +1,43 @@
+//-------------------------------------------------------------------------------------------//
+Calendario:
+LOAD
+	TempDate 																as %IdCalendario,
+	Date(TempDate)															as [Data],
+    Year(TempDate) 															as [Ano],
+	Month(TempDate)															as [Mês],
+	Day(TempDate) 															as [Dia],
+	DayNumberOfQuarter(TempDate) 											as [Dia Trimestre],
+	DayNumberOfYear(TempDate) 												as [Dia Ano],
+	Week(TempDate) 															as [Semana],
+    WeekDay(TempDate) 														as [Dia Semana],
+   	Week(Weekstart(TempDate)) & '-' &WeekYear(TempDate) 					as [Semana Ano],
+	Num(Month(TempDate),00) 												as [Nro Mês],
+   	MonthName(TempDate)				 										as [Mês Ano],
+	Ceil(Month(TempDate)/4)&'º Quad' 										as [Quadrimestre],
+	Ceil(Month(TempDate)/3)&'º Trim' 										as [Trimestre],
+	Ceil(Month(TempDate)/2)&'º Bim' 										as [Bimestre],
+	
+    If(MonthName(TempDate)=MonthName(Today()),
+		If(Date(Date#(TempDate,'DD/MM/YYYY'))=Date(Today(),'DD/MM/YYYY'),'SIM','NÃO'),
+		If(MonthEnd(TempDate) = Date(TempDate),'SIM','NÃO')) 				as [Ultimo Dia Mês],
+     
+     If(Year(TempDate)=Year(Today()),
+		If(Date(Date#(TempDate,'DD/MM/YYYY'))=Date(Today(),'DD/MM/YYYY'),'SIM', 'NÃO'),
+		If(YearEnd(TempDate) = Date(TempDate),'SIM','NÃO'))					as [Ultimo Dia Ano]
+;
+//-------------------------------------------------------------------------------------------//
+//------------------------------ Gerar uma tabela temporária de datas
+LOAD 
+	Date(MinDate + IterNo()) 						as TempDate,
+    MaxDate
+WHILE MinDate + IterNo() <= MaxDate
+;
+//-------------------------------------------------------------------------------------------//
+//------------------------------ Obter min/max das datas do campo
+LOAD
+	Min(FieldValue('%IdCalendario', RecNo()))-1		as MinDate,
+	Max(FieldValue('%IdCalendario', RecNo()))		as MaxDate
+AUTOGENERATE
+	FieldValueCount('%IdCalendario')
+;
+//-------------------------------------------------------------------------------------------//

@@ -1,0 +1,10 @@
+PATHCONTAINS(
+    dHierarquia[Path],
+    MAXX(
+        FILTER(
+            dHierarquia,
+            dHierarquia[profissional_email] = USERPRINCIPALNAME()
+        ),
+        dHierarquia[profissional_id]
+    )
+)

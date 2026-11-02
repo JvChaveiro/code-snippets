@@ -1,0 +1,1 @@
+last_update = "Última atualização: " & FORMAT(MAX(dim_last_update[last_update_date]), "dd/MM/yyyy hh:mm:ss", "pt-br")

@@ -1,0 +1,19 @@
+DIRECTORY [lib://<CONEXAO>/<PASTA_QVD>/];
+
+//----------------- Store All Tables:
+For vCount = 0 to NoOfTables()-1
+      
+      Let vTableName = TableName($(vCount));
+      Store [$(vTableName)] Into [$(vTableName).qvd](qvd);
+      
+Next vCount;
+
+//----------------- Drop All Tables:
+LET NumTabela = NoOfTables();
+
+For j=0 to $(NumTabela)-1
+
+	Let NomeTabela = TableName(0);
+  	Drop Table [$(NomeTabela)];
+
+Next j;

@@ -1,0 +1,10 @@
+% Realizado Concluídas = 
+VAR __RvsM = DIVIDE([Concluídas] - [Planejadas], [Planejadas])
+
+RETURN MIN(1 + __RvsM, 1)
+
+
+% Restante Concluídas = 
+VAR __RvsM = DIVIDE([Concluídas] - [Planejadas], [Planejadas])
+
+RETURN MAX(-__RvsM, 0)

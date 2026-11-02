@@ -1,0 +1,36 @@
+dCalendario = 
+GENERATE(
+    CALENDARAUTO(),
+    ROW(
+        "Ano", YEAR([Date]),
+        "Trimestre", QUARTER([Date]),
+        "TrimestreNome", QUARTER([Date]) & "T",
+        "TrimestreAno", QUARTER([Date]) & "T-" & YEAR([Date]),
+        "TrimestreAnoCod",FORMAT([Date], "YYYYQ", "pt-br"),
+        "Mes", MONTH([Date]),
+        "MesNome", FORMAT([Date], "MMMM", "pt-br"),
+        "MesNomeAbv", FORMAT([Date], "MMM", "pt-br"),
+        "MesAno", FORMAT([Date], "MMM/yyyy", "pt-br"),
+        "MesAnoCod", FORMAT([Date], "YYYYMM", "pt-br"),
+        "SemanaDoAno", WEEKNUM([Date]),
+        "SemanaDoMês", 
+            SWITCH(
+                TRUE(),
+                DAY([Date])<=7,1,
+                DAY([Date])<=14,2,
+                DAY([Date])<=21,3,
+                DAY([Date])<=28,4,
+                5
+            ),
+        "Dia", DAY([Date]),
+        "DiaDaSemana", WEEKDAY([Date]),
+        "DiaDaSemanaNome", FORMAT([Date], "dddd", "pt-br"),
+        "DiaDaSemanaNomeAbv", FORMAT([Date], "ddd", "pt-br"),
+        "FinalDeSemana", 
+            IF(
+                WEEKDAY([Date]) = 1 || WEEKDAY([Date]) = 7,
+                "Sim",
+                "Não"
+            )
+    )
+)

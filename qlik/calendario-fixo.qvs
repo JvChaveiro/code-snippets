@@ -1,0 +1,41 @@
+//---------------------------------------------------------------------------------------------------//
+//------------------------------ Variáveis para usar no calendário
+LET vMesInicial = Date('01/01/2020');
+LET vMesFinal = Date(Today());
+//---------------------------------------------------------------------------------------------------//
+Calendario:
+LOAD  
+	Date(TempDate,'YYYYMMDD')				 								AS %IdCalendario,
+    Year(TempDate) & Num(Month(TempDate),00) 								AS %IdAnoMes,
+	Date(TempDate)															AS [Data],
+    Year(TempDate) 															AS [Ano],
+	Month(TempDate)															AS [Mês],
+	Day(TempDate) 															AS [Dia],
+	DayNumberOfQuarter(TempDate) 											AS [Dia Trimestre],
+	DayNumberOfYear(TempDate) 												AS [Dia Ano],
+	Week(TempDate) 															AS [Semana],
+    WeekDay(TempDate) 														AS [Dia Semana],
+   	Week(Weekstart(TempDate)) & '-' &WeekYear(TempDate) 					AS [Semana Ano],
+	Num(Month(TempDate),00) 												AS [Nro Mês],
+   	MonthName(TempDate)				 										AS [Mês Ano],
+	Ceil(Month(TempDate)/4)&'º Quad' 										AS [Quadrimestre],
+	Ceil(Month(TempDate)/3)&'º Trim' 										AS [Trimestre],
+	Ceil(Month(TempDate)/2)&'º Bim' 										AS [Bimestre],
+    
+    IF(MonthName(TempDate)=MonthName(Today()),
+		IF(Date(Date#(TempDate,'DD/MM/YYYY'))=Date(Today(),'DD/MM/YYYY'), 'SIM','NÃO'),
+			IF(MonthEnd(TempDate)=Date(TempDate),'SIM','NÃO')
+		) 																	AS [Ultimo Dia Mês],
+     
+     IF(Year(TempDate)=Year(Today()),
+		IF(Date(Date#(TempDate,'DD/MM/YYYY'))=Date(Today(),'DD/MM/YYYY'), 'SIM', 'NÃO'),
+			IF(YearEnd(TempDate)=Date(TempDate) , 'SIM','NÃO')
+		)																	AS [Ultimo Dia Ano]
+;
+//---------------------------------------------------------------------------------------------------//
+//------------------------------ Obter min/max das datas e gerar tabela Calendário
+LOAD
+	Date(Date(Today()) - Recno() + 1,'DD/MM/YYYY') 							AS TempDate
+AUTOGENERATE(vMesFinal-vMesInicial+1)
+;
+//---------------------------------------------------------------------------------------------------//

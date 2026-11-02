@@ -1,0 +1,29 @@
+Ranking = 
+RANKX(
+    ALL( Tabela),
+    [Medida]
+)
+
+=====================================================
+
+Outros Dinâmico =
+VAR LinhaContemOutros = SELECTEDVALUE( Tabela[Coluna] ) = "Outros"
+
+VAR SomaOutros = 
+IF(
+    LinhaContemOutros,
+    SUMX(
+        FILTER(
+            ALL( Tabela[Coluna] ),
+            [Ranking] >= 6
+        ),
+        [Medida]
+    )
+)
+
+RETURN
+IF(
+    [Ranking] < 6,
+    [Medida],
+    SomaOutros
+)
