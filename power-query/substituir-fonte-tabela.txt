@@ -1,0 +1,10 @@
+Substituição para consulta padrão do Power Query:
+DE:        Fonte{[Schema="<SCHEMA>",Item="<TABELA>"]}[Data]
+PARA:   Fonte{[Schema="<SCHEMA>",Item="<TABELA>_old"]}[Data]
+ 
+DE:        Source{[Schema="<SCHEMA>",Item="<TABELA>"]}[Data]
+PARA:   Source{[Schema="<SCHEMA>",Item="<TABELA>_old"]}[Data]
+
+Substituição para consulta em SQL:
+DE:        FROM <SCHEMA>.<TABELA>
+PARA:   FROM <SCHEMA>.<TABELA>_old

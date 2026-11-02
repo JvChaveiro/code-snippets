@@ -1,0 +1,7 @@
+CALCULATE(
+  SUM(Sales[Revenue]),
+  FILTER(
+    ALL(Sales),
+    Sales[SaleDate] <= MAX(Sales[SaleDate])
+  )
+)

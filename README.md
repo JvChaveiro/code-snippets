@@ -12,6 +12,7 @@ A ideia é ter um ponto de partida testado em vez de reescrever a mesma coisa a 
 | `power-query/` | Consultas e funções em M (Power Query) |
 | `qlik/` | Scripts de carga do Qlik Sense |
 | `excel/` | Formatos personalizados de célula |
+| `git/` | Comandos de Git que uso normalmente |
 | `referencia/` | Listas e tabelas de apoio (stop words, paletas, municípios) |
 
 ## Convenções

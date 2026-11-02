@@ -1,0 +1,14 @@
+lastUpdate__text = 
+"Última atualização: "
+ & FORMAT(
+    MAXX(
+        FILTER(
+            sup_last_update,
+            sup_last_update[confirm_update] = 1
+        ),
+        sup_last_update[last_update_date]
+    ), 
+    "dd/MM/yyyy hh:mm", 
+    "pt-br"
+) 
+ & " (<FUSO>)"
